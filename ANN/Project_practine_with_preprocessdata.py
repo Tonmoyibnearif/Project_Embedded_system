@@ -4,8 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 df = pd.read_csv('DATA_WIth_DATE_data_Prtc_one.csv')
+#df.drop('cos_dayofweek', axis=1, inplace=True)
+#df.drop('sin_dayofweek', axis=1, inplace=True)
+df.drop('Date', axis=1, inplace=True)
+#df.to_csv('Feature_selection_done_one',index=False)
+
 cols = df.columns.tolist()
-x = df.iloc[:, 12:19].values
+x = df.iloc[:, 0:19].values
 y = df.iloc[:, 19].values
 
 
@@ -45,7 +50,7 @@ def baseline_model(model):
 
 #Evaluation of Neural network
 model= Sequential()
-model.add(Dense(10,input_dim=7,kernel_initializer='normal',activation='relu'))
+model.add(Dense(10,input_dim=19,kernel_initializer='normal',activation='relu'))
 model.add(Dense(1,kernel_initializer='normal'))
 model.compile(loss='mean_squared_error',optimizer='adam')
 for i in range(10):
@@ -73,5 +78,13 @@ plt.xlabel('Time')
 plt.xlabel('Power')
 plt.legend()
 plt.show()
+
+# serialize model to JSON
+model_json = model.to_json()
+with open("model.json", "w") as json_file:
+    json_file.write(model_json)
+# serialize weights to HDF5
+model.save_weights("model.h5")
+print("Saved model to disk")
 
 

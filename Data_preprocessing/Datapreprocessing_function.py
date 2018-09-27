@@ -124,7 +124,7 @@ import numpy as np
          df = df[cols]
     # now dropping off unneccessary columns
          df.drop('Time', axis=1, inplace=True)
-         df.drop('Date', axis=1, inplace=True)
+         #df.drop('Date', axis=1, inplace=True)
          df.drop('Dayofweek', axis=1, inplace=True)
          df.drop('Monthofyear', axis=1, inplace=True)
          df.drop('Weekofyear', axis=1, inplace=True)
@@ -141,6 +141,6 @@ import numpy as np
 #         y = df.iloc[:, 19].values
          return df,
 
-#mydata=CSV_preprocessing("wf3.csv")
+mydata=CSV_preprocessing("wf3.csv")
 
-#dff = pd.read_csv("Preprocessed_data_two.csv")
+dff = pd.read_csv("Preprocessed_data_three.csv")
