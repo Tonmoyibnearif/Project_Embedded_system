@@ -1,7 +1,8 @@
-
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+path="./hdf5/"
 
 df = pd.read_csv('DATA_WIth_DATE_data_Prtc_one.csv')
 #df.drop('cos_dayofweek', axis=1, inplace=True)
@@ -57,34 +58,35 @@ for i in range(10):
  model = baseline_model(model)
 
 
-y_pred=model.predict(x_test)
-#MSE
-MSE=(metrics.mean_squared_error(y_test, y_pred))
-#MAE
-MAE=(metrics.mean_absolute_error(y_test, y_pred))
-#RMSe
-RMSE=(np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
-#to print numpy array
-np.set_printoptions(precision=15)
-print ("MAE:%2f" %(MAE))
-print ("MSE:%2f" %(MSE))
-print ("RMSE:%2f" %(RMSE))
+#y_pred=model.predict(x_test)
+##MSE
+#MSE=(metrics.mean_squared_error(y_test, y_pred))
+##MAE
+#MAE=(metrics.mean_absolute_error(y_test, y_pred))
+##RMSe
+#RMSE=(np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+##to print numpy array
+#np.set_printoptions(precision=15)
+#print ("MAE:%2f" %(MAE))
+#print ("MSE:%2f" %(MSE))
+#print ("RMSE:%2f" %(RMSE))
 
-#Visualising the Results
-plt.plot(y_test, color='red',label='Test_Windpower_Data')
-plt.plot(y_pred, color='blue',label='Predicted_Windpower_Data')
-plt.title('Windfarm_Power_prediction')
-plt.xlabel('Time')
-plt.xlabel('Power')
-plt.legend()
-plt.show()
+##Visualising the Results
+#plt.plot(y_test, color='red',label='Test_Windpower_Data')
+#plt.plot(y_pred, color='blue',label='Predicted_Windpower_Data')
+#plt.title('Windfarm_Power_prediction')
+#plt.xlabel('Time')
+#plt.xlabel('Power')
+#plt.legend()
+#plt.show()
 
-# serialize model to JSON
-model_json = model.to_json()
-with open("model.json", "w") as json_file:
-    json_file.write(model_json)
-# serialize weights to HDF5
-model.save_weights("model.h5")
+# Saving Entire model to HDF5
+model.save(os.path.join(path,"model.h5"))
 print("Saved model to disk")
-
+# from keras.models import load_model
+# model2=load_model(os.path.join(path,"model.h5"))
+# y_pred=model2.predict(x_test)
+#
+# MSE=(metrics.mean_squared_error(y_test, y_pred))
+# print ("MSE:%2f" %(MSE))
 

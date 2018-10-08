@@ -17,13 +17,6 @@ x = dataset.iloc[:-2, 0:19]
 y = dataset.iloc[2:, 19]
 cols=x.columns.tolist()
 
-y_test=[]
-for i in range(60,15927):
-    x_train.append(Dataset_scalled[i-60:i, 0])
-    y_train.append(Dataset_scalled[i, 0])
-
-y_shifted = Dataset_scalled[2:,0]
-x_length = Dataset_scalled[:-2,0zu]
 #f_regression feature selection
 features=f_regression(x,y,center=True)
 list_f=list(features)
@@ -32,11 +25,11 @@ print(list_f[0])
 #mutual_info_regression feature selection
 feature=mutual_info_regression(x,y,discrete_features='auto',n_neighbors=3,copy=True,random_state=None)
 #feature selection using linear regression
-lm2 = LinearRegression()
-lm2.fit(x, y)
-coefficient=lm2.coef_
-print(lm2.intercept_)
-lr=lm2.coef_
+lr = LinearRegression()
+lr.fit(x, y)
+coefficient=lr.coef_
+print(lr.intercept_)
+lr=lr.coef_
 
 #passing all values into objects
 feature_linear=list(zip(cols,lm2.coef_))
@@ -53,11 +46,14 @@ plt.bar(cols,list_f[1],label='f_regression',color='b')
 plt.bar(cols,feature,label='Mutual_regression',color='c')
 plt.bar(cols,lr,label='linear_regression',color='c')
 #bar plot with angle Mutual Info regression
-x = range(len(cols))
-plt.xticks(x,  cols)
+X_selected=dataset.loc[:, ['AirPressure','cos_weekofyear','WindSpeed100m', 'WindSpeed10m', 'WindDirectionMeridional']]
+feature_s=mutual_info_regression(X_selected,y,discrete_features='auto',n_neighbors=3,copy=True,random_state=None)
+colss=X_selected.columns.tolist()
+X_selected = range(len(colss))
+plt.xticks(X_selected,  colss)
 locs, labels = plt.xticks()
 plt.setp(labels, rotation=90)
-plt.plot(x, feature)
+plt.plot(X_selected, feature_s)
 #bar plot with  linearregression
 x = range(len(cols))
 plt.xticks(x,  cols)
