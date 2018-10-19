@@ -1,4 +1,4 @@
-import tensorflow
+#import tensorflow
 import pandas as pd
 import os
 path="./hdf5/"
@@ -16,32 +16,38 @@ dataset=pd.read_csv('Preprocessed_data_three.csv')
 dataset['Date']=pd.to_datetime(dataset['Date'])
 dataset=dataset.set_index(dataset['Date'])
 dataset=dataset.sort_index()
-#dataset.drop('Date', axis=1, inplace=True)
-#splitting the Data into test and train
-features=dataset.loc[:, ['Date','cos_weekofyear', 'sin_time', 'AirPressure', 'WindSpeed100m', 'WindDirectionZonal', 'WindDirectionMeridional','PowerGeneration']]
+#Creating Spcial Dataset
+#for power in range(1,2):
+#    dataset['Power_'+str(power)]=dataset.PowerGeneration.shift(power)
+cols=dataset.columns.tolist()
+Features=dataset.iloc[:, 11:46]
+Features=Features.fillna(0)
+#Test and Train Spilt
+split_date = pd.datetime(2017,1,31)
+Test_date = pd.datetime(2017,2,28)
+df_training = Features.loc[dataset['Date'] <= split_date]
+df_test = Features.loc[dataset['Date'] > Test_date]
+val_mask=(dataset.Date > pd.to_datetime(split_date)) & (dataset.Date<=pd.to_datetime(Test_date))
+df_validation=Features.loc[val_mask]
+df_training = Features.loc[dataset['Date'] <= split_date]
+df_test = Features.loc[dataset['Date'] > split_date]
 
-split_date = pd.datetime(2017,3,31)
 
-df_training = features.loc[dataset['Date'] <= split_date]
-df_test = features.loc[dataset['Date'] > split_date]
-
-df_test.drop('Date', axis=1, inplace=True)
-df_training.drop('Date', axis=1, inplace=True)
-
-df_test=df_test.reset_index()
-df_training=df_training.reset_index()
-X_train=df_training.iloc[:, 1:7]
-Y_train=df_training.iloc[:, 7:]
+X_train=df_training.iloc[:, 0:9]
+Y_train=df_training.iloc[:, 9:]
 print(Y_train.shape)
-X_test=df_test.iloc[:, 1:7].values
-Y_test=df_test.iloc[:, 7:].values
+X_test=df_test.iloc[:, 0:9]
+Y_test=df_test.iloc[:, 9:]
+
+X_val=df_validation.iloc[:, 0:9]
+Y_val=df_validation.iloc[:, 9:]
 #feature scalling
 sc=MinMaxScaler(feature_range=(0,1))
 X_train=sc.fit_transform(X_train)
 #X_train=array(X_train)
-from numpy import array
-X_train=array(X_train)
-print(X_train.shape[0])
+#from numpy import array
+#X_train=array(X_train)
+#print(X_train.shape[0])
 
 #Creating 2 Hour Autoregression
 Testing_data=X_train.iloc[0:-2,0:6].values

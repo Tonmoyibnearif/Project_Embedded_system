@@ -31,12 +31,12 @@ test=df_test.iloc[:, 19:]
 test=test.reset_index()
 test.drop('Date', axis=1, inplace=True)
 #make sure have numpy columns
-Dataset_numpy=train.iloc[:, 19:].values
-features=train.loc[:, ['cos_weekofyear', 'sin_time', 'AirPressure', 'WindSpeed100m', 'WindDirectionZonal', 'WindDirectionMeridional']].values
+Dataset_numpy=df_training.iloc[:, 19:].values
+#features=train.loc[:, ['cos_weekofyear', 'sin_time', 'AirPressure', 'WindSpeed100m', 'WindDirectionZonal', 'WindDirectionMeridional']].values
 #feature scalling
 sc=MinMaxScaler(feature_range=(0,1))
 Dataset_scalled=sc.fit_transform(Dataset_numpy)
-features=sc.fit_transform(features)
+#features=sc.fit_transform(features)
 #
 #X=Dataset_scalled[:, 0:19]
 #Y=Dataset_scalled[:, 19]
