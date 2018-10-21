@@ -97,7 +97,7 @@ X_train_4,Y_train_4,X_val_4,Y_val_4,X_test_4,Y_test_4=Reshaper(csv,4)
 X_train_5,Y_train_5,X_val_5,Y_val_5,X_test_5,Y_test_5=Reshaper(csv,5)
 X_train_6,Y_train_6,X_val_6,Y_val_6,X_test_6,Y_test_6=Reshaper(csv,6)
 X_train_7,Y_train_7,X_val_7,Y_val_7,X_test_7,Y_test_7=Reshaper(csv,7)
-X_train_8,Y_train_8,X_val_2,Y_val_8,X_test_2,Y_test_8=Reshaper(csv,8)
+X_train_8,Y_train_8,X_val_8,Y_val_8,X_test_8,Y_test_8=Reshaper(csv,8)
 X_train_9,Y_train_9,X_val_9,Y_val_9,X_test_9,Y_test_9=Reshaper(csv,9)
 X_train_10,Y_train_10,X_val_10,Y_val_10,X_test_10,Y_test_10=Reshaper(csv,10)
 X_train_11,Y_train_11,X_val_11,Y_val_11,X_test_11,Y_test_11=Reshaper(csv,11)
@@ -133,14 +133,17 @@ Pred_3,Mse_3,Rmse_3=Predictor(X_test_3,Y_test_3,compiler_3)
 Pred_4,Mse_4,Rmse_4=Predictor(X_test_4,Y_test_4,compiler_4)
 Pred_5,Mse_5,Rmse_5=Predictor(X_test_5,Y_test_5,compiler_5)
 Pred_6,Mse_6,Rmse_6=Predictor(X_test_6,Y_test_6,compiler_6)
+Pred_7,Mse_7,Rmse_7=Predictor(X_test_7,Y_test_7,compiler_7)
 
 print(Rmse_1)
 print(Rmse_2)
 print(Rmse_3)
 print(Rmse_4)
 print(Rmse_5)
+print(Rmse_6)
+print(Rmse_7)
 
-visual=visualization(Y_test_5,Pred_5)
+visual=visualization(Y_test_7,Pred_7)
 
 
 
