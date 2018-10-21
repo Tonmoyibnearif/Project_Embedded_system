@@ -104,6 +104,23 @@ X_train_10,Y_train_10,X_val_10,Y_val_10,X_test_10,Y_test_10=Reshaper(csv,10)
 X_train_11,Y_train_11,X_val_11,Y_val_11,X_test_11,Y_test_11=Reshaper(csv,11)
 X_train_12,Y_train_12,X_val_12,Y_val_12,X_test_12,Y_test_12=Reshaper(csv,12)
 X_train_13,Y_train_13,X_val_13,Y_val_13,X_test_13,Y_test_13=Reshaper(csv,13)
+X_train_14,Y_train_14,X_val_14,Y_val_14,X_test_14,Y_test_14=Reshaper(csv,14)
+X_train_15,Y_train_15,X_val_15,Y_val_15,X_test_15,Y_test_15=Reshaper(csv,15)
+X_train_16,Y_train_16,X_val_16,Y_val_16,X_test_16,Y_test_16=Reshaper(csv,16)
+X_train_17,Y_train_17,X_val_17,Y_val_17,X_test_17,Y_test_17=Reshaper(csv,17)
+X_train_18,Y_train_18,X_val_18,Y_val_18,X_test_18,Y_test_18=Reshaper(csv,18)
+X_train_19,Y_train_19,X_val_19,Y_val_19,X_test_19,Y_test_19=Reshaper(csv,19)
+X_train_20,Y_train_20,X_val_20,Y_val_20,X_test_20,Y_test_20=Reshaper(csv,20)
+X_train_21,Y_train_21,X_val_21,Y_val_21,X_test_21,Y_test_21=Reshaper(csv,21)
+X_train_22,Y_train_22,X_val_22,Y_val_22,X_test_22,Y_test_22=Reshaper(csv,22)
+X_train_23,Y_train_23,X_val_23,Y_val_23,X_test_23,Y_test_23=Reshaper(csv,23)
+X_train_24,Y_train_24,X_val_24,Y_val_24,X_test_24,Y_test_24=Reshaper(csv,24)
+X_train_25,Y_train_25,X_val_25,Y_val_25,X_test_25,Y_test_25=Reshaper(csv,25)
+X_train_26,Y_train_26,X_val_26,Y_val_26,X_test_26,Y_test_26=Reshaper(csv,26)
+X_train_27,Y_train_27,X_val_27,Y_val_27,X_test_27,Y_test_27=Reshaper(csv,27)
+
+
+
 
 compiler_1=Build_model()
 compiler_1.fit(X_train_1,Y_train_1,validation_data=(X_val_1,Y_val_1),epochs=10,batch_size=100)
