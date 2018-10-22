@@ -150,42 +150,26 @@ Pred_25,Mse_25,Rmse_25=Predictor(X_train_25,Y_train_25,X_val_25,Y_val_25,X_test_
 Pred_26,Mse_26,Rmse_26=Predictor(X_train_26,Y_train_26,X_val_26,Y_val_26,X_test_26,Y_test_26)
 Pred_27,Mse_27,Rmse_27=Predictor(X_train_27,Y_train_27,X_val_27,Y_val_27,X_test_27,Y_test_27)
 
-print(Pred_1.history.keys())
-
-
-
-print(Rmse_1)
 
 from numpy import arange
-visual=visualization()
+
 Hour=[]
 Hour=arange(27)
 
-Ho=[]
-Ho.append(Rmse_1)
-Ho.append(Rmse_2)
-Ho.append(Rmse_3)
-Ho.append(Rmse_4)
-Ho.append(Rmse_5)
-Ho.append(Rmse_6)
-Ho.append(Rmse_7)
-Ho.append(Rmse_8)
-Ho.append(Rmse_9)
-Ho.append(Rmse_10)
-Ho.append(Rmse_11)
-Ho.append(Rmse_12)
-Ho.append(Rmse_13)
-Ho.append(Rmse_14)
-Ho.append(Rmse_15)
-Ho.append(Rmse_16)
-Ho.append(Rmse_17)
-Ho.append(Rmse_18)
-Ho.append(Rmse_19)
-Ho.append(Rmse_20)
-Ho.append(Rmse_21)
-Ho.append(Rmse_22)
-Ho.append(Rmse_23)
-Ho.append(Rmse_24)
-Ho.append(Rmse_25)
-Ho.append(Rmse_26)
-Ho.append(Rmse_27)
+Ho=[[Rmse_1,Rmse_2,Rmse_3,Rmse_4,Rmse_5,Rmse_6,Rmse_7,Rmse_8,Rmse_9,Rmse_10,Rmse_11,Rmse_12,Rmse_13,Rmse_14,Rmse_15,Rmse_16,Rmse_17,Rmse_18,Rmse_19,Rmse_20,Rmse_21,Rmse_22,Rmse_23,Rmse_24,Rmse_25,Rmse_26,Rmse_27],[Mse_1,Mse_2,Mse_3,Mse_4,Mse_5,Mse_6,Mse_7,Mse_8,Mse_9,Mse_10,Mse_11,Mse_12,Mse_13,Mse_14,Mse_15,Mse_16,Mse_17,Mse_18,Mse_19,Mse_20,Mse_21,Mse_22,Mse_23,Mse_24,Mse_25,Mse_26,Mse_27]]
+
+
+visual=visualization(Hour,Ho)
+
+
+print(Mse_1)
+
+plt.figure(figsize=(10,8))
+plt.plot(Hour,Ho[0],'go-',label='RMSE')
+plt.plot(Hour,Ho[1],'bo-',label='MSE')
+#plt.plot(Pred_1, color='blue',label='Predicted_Windpower_Data')
+plt.title('Windfarm_Power_Forecast_Error_Over_27_Hours_Autoregression')
+plt.xlabel('Hours')
+plt.ylabel('Normalized Value')
+plt.legend()
+plt.show()
