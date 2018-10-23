@@ -80,46 +80,37 @@ def Predictor(X_train_x,Y_train_x,X_val_x,Y_val_x,X_test,Y_test):
     MSE = compiler_x.evaluate(X_test, Y_test, batch_size=100, verbose=0)
     RMSE = math.sqrt(MSE[0])
     return Predicted_windpower,MSE[0],RMSE
-def visualization(Y_test_1,Pred_1):
+def visualization(Hour,RMSError,MSError):
     plt.figure(figsize=(10,8))
-    plt.plot(Y_test_1, color='red',label='Test_Windpower_Data')
-    plt.plot(Pred_1, color='blue',label='Predicted_Windpower_Data')
-    plt.title('Windfarm_Power_prediction')
-    plt.xlabel('Time')
-    plt.xlabel('Power')
+    plt.plot(Hour,RMSError,'go-',label='RMSE')
+    plt.plot(Hour,MSError,'bo-',label='MSE')
+    #plt.plot(Pred_1, color='blue',label='Predicted_Windpower_Data')
+    plt.title('Windfarm_Power_Forecast_Error_Over_27_Hours_Autoregression')
+    plt.xlabel('Hours')
+    plt.ylabel('Normalized Value')
     plt.legend()
     plt.show()
 
 #Variables Log
 
 csv='Preprocessed_data_three.csv'
-RMSE=[]
-MSE=[]
+RMSError=[]
+MSError=[]
 for i in range(1,27):
     X_train,Y_train,X_val,Y_val,X_test,Y_test=Reshaper(csv,i)
     Pred,Mse,Rmse=Predictor(X_train,Y_train,X_val,Y_val,X_test,Y_test)
-    RMSE[i]=Rmse
-    MSE[i]=Mse
+    print("Runing Autoregression number:",i)
+    RMSError.append(Rmse)
+    MSError.append(Mse)
 
 
 from numpy import arange
 
-
-Hour=arange(27)
-
+Hour=arange(26)
 
 
-visual=visualization(Hour,Ho)
+
+visual=visualization(Hour,RMSError,MSError)
 
 
-print(Mse_1)
 
-plt.figure(figsize=(10,8))
-plt.plot(Hour,Ho[0],'go-',label='RMSE')
-plt.plot(Hour,Ho[1],'bo-',label='MSE')
-#plt.plot(Pred_1, color='blue',label='Predicted_Windpower_Data')
-plt.title('Windfarm_Power_Forecast_Error_Over_27_Hours_Autoregression')
-plt.xlabel('Hours')
-plt.ylabel('Normalized Value')
-plt.legend()
-plt.show()
